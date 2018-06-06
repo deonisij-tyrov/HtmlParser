@@ -52,7 +52,7 @@ public class TelegrammParser {
         Elements elements = document.getElementsByTag("span");
         for (Element element : elements) {
             if (element.attr("class").equals("im_message_views_cnt")) {
-//                System.out.println(element.text());
+                System.out.println(element.text());
 
                 try {
                     String value = element.text();
