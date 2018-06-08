@@ -3,7 +3,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,22 +35,31 @@ public class TwitterParser {
     }
 
     public void getPostsInfo() {
-        final int HUNDRED = 100;
         int retwitsSummary = 0;
         int likesSummary = 0;
 
-        Elements elements = document.getElementsByTag("button");
+        Elements elements = document.getElementsByAttribute("class");
         List<Integer> retwits = new ArrayList<>();
         List<Integer> likes = new ArrayList<>();
         for (Element element : elements) {
-            if (element.attr("class").equals("ProfileTweet-actionButton  js-actionButton js-actionRetweet")) {
-                retwits.add(getInfo(element));
-            }
+            if (element.toString().contains("tweet")) {
+//                if (element.getElementsByAttributeValue("class", "Icon Icon--small Icon--retweeted")) {
+//                    System.out.println("пропустил твит " + element.getElementsByAttributeValue("class", "Icon Icon--small Icon--retweeted"));
+//                    continue;
+//                }
+                Elements elements1 = element.getElementsByTag("button");
+                for (Element element1 : elements1) {
+                    if (element1.attr("class").equals("ProfileTweet-actionButton  js-actionButton js-actionRetweet")) {
+                        System.out.println("retw" + getInfo(element1));
+                        retwits.add(getInfo(element1));
+                    }
 
-            if (element.attr("class").equals("ProfileTweet-actionButton js-actionButton js-actionFavorite")) {
-                likes.add(getInfo(element));
+                    if (element1.attr("class").equals("ProfileTweet-actionButton js-actionButton js-actionFavorite")) {
+//                        System.out.println("like" + getInfo(element1));
+                        likes.add(getInfo(element1));
+                    }
+                }
             }
-
         }
 
 
