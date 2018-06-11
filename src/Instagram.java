@@ -50,15 +50,18 @@ public class Instagram {
             }
         }
 
-
-
         for (Map.Entry<Integer, Integer> m : likes.entrySet()) {
             System.out.printf("\nkey - %s value - %s", m.getKey(), m.getValue());
         }
 
-
+        int summ = 0;
+        for (Map.Entry<Integer, Integer> m : likes.entrySet()) {
+            summ += m.getValue();
+        }
+        System.out.println("\nсреднее по лайкам - " + summ/likes.size());
     }
-
+/*аналогия лайки
+* (?<="shortcode":")\w+(?=","edge_media_to_comment")*/
     public void getComments() {
         String s = document.html();
     }

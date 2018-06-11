@@ -27,6 +27,6 @@ public class Main {
 
         Instagram instagram = new Instagram();
         instagram.load("https://www.instagram.com/miboodle/");
-        instagram.getInfo();
+        instagram.getLikes();
     }
 }
